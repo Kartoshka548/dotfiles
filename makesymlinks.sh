@@ -9,7 +9,7 @@
 dir=~/dotfiles                    # dotfiles directory
 prev_dir=~/_dotfiles            # old dotfiles backup directory
 
-files="vim screens bash_history bash_logout bashrc inputrc profile screenbashrc screenbashrcgit screendefbashrc screenrc shellsrc vimrc"    # list of files/folders to symlink in homedir
+files="vim screens bash_history bash_logout bashrc inputrc profile screenbashrc screenbashrcgit screendefbashrc screenrc vimrc"    # list of files/folders to symlink in homedir
 just_files="mTouch.py"
 ##########
 
@@ -26,7 +26,7 @@ echo "done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 # this also includes dot-directories. 
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $prev_dir"
+    echo "Moving existing dotfile .$file from ~ to $prev_dir"
     mv ~/.$file ~/_dotfiles/
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
@@ -34,7 +34,7 @@ done
 
 # for normal files
 for file in $just_files; do
-    echo "Moving any existing files from ~ to $prev_dir"
+    echo "Moving existing file $file from ~ to $prev_dir"
     mv ~/$file ~/_dotfiles/
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/$file
