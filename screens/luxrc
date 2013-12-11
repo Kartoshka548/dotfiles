@@ -1,0 +1,88 @@
+zombie az
+hardstatus alwayslastline
+hardstatus string '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%? %?%= %{g}][%{Y}%l%{g}]%{=b C}[ %d %M %c ]%{W}'
+deflogin on
+startup_message off
+#screen -t runserver 1 bash -lc "source ~/.virtualenvs/lux/bin/activate; cd ~/LUX/luxProject; export DJANGO_SETTINGS_MODULE=lux.settings_vlad; ./manage.py runserver"
+#screen -t "django shell" 1 bash -lc "source ~/.virtualenvs/lux/bin/activate; cd ~/LUX/luxProject; export DJANGO_SETTINGS_MODULE=lux.settings_vlad; ./manage.py shell"
+#screen -t "git CLI" 2 bash --rcfile ~/.screenbashrc #-lc "source ~/.virtualenvs/lux/bin/activate; cd ~/LUX/luxProject; export DJANGO_SETTINGS_MODULE=lux.settings_vlad; git status; python"
+# screen -t ssh 4 bash -lc "source ~/.virtualenvs/lux/bin/activate; cd ~/LUX/luxProject; ssh -i ../lux-dev.pem lux@int01.lux.liveu.tv" 
+select 0
+bind c screen 1 # window numbering starts at 1 not 0
+bind 0 select 10
+select 1
+# huge scrollback buffer
+defscrollback 5000
+
+#(defshell is synonym for shell) each new window will open this:
+shell "/bin/bash" #--rcfile ~/.screendefbashrc"
+shelltitle "Shell"
+# 256 colors
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+
+#  # mouse tracking allows to switch region focus by clicking
+# mousetrack on
+#
+## get rid of silly xoff stuff
+#bind s split
+
+# layouts
+layout autosave on
+layout new one
+split -v
+screen -t runserver 1 bash -lc "source ~/.virtualenvs/lux/bin/activate; cd ~/LUX/luxProject; export DJANGO_SETTINGS_MODULE=lux.settings_vlad; ./manage.py runserver"
+focus
+screen -t "git CLI" 2 bash --rcfile ~/.screenbashrcgit #-lc "source ~/.virtualenvs/lux/bin/activate; cd ~/LUX/luxProject; export DJANGO_SETTINGS_MODULE=lux.settings_vlad; git status; python"
+#layout new two
+#select 1
+#split
+#resize -v +8
+#focus down
+#select 4
+#focus up
+#layout new three
+#select 1
+#split
+#resize -v +7
+#focus down
+#select 3
+#split -v
+#resize -h +10
+#focus right
+#select 4
+#focus up
+#
+#layout attach one
+#layout select one
+#
+##    # navigating regions with Ctrl-arrows
+#bindkey "^[[1;5D" focus left
+#bindkey "^[[1;5C" focus right
+#bindkey "^[[1;5A" focus up
+#bindkey "^[[1;5B" focus down
+#
+## switch windows with F3 (prev) and F4 (next)
+#bindkey "^[OR" prev
+#bindkey "^[OS" next
+#
+## switch layouts with Ctrl+F3 (prev layout) and Ctrl+F4 (next)
+#bindkey "^[O1;5R" layout preV
+#bindkey "^[O1;5S" layout next
+#
+## F2 puts Screen into resize mode. Resize regions using hjkl keys.
+#bindkey "^[OQ" eval "command -c rsz" # enter resize mode
+#
+## use hjkl keys to resize regions
+#bind -c rsz h eval "resize -h -5" "command -c rsz"
+#bind -c rsz j eval "resize -v -5" "command -c rsz"
+#bind -c rsz k eval "resize -v +5" "command -c rsz"
+#bind -c rsz l eval "resize -h +5" "command -c rsz"
+#
+## quickly switch between regions using tab and arrows
+#bind -c rsz \t    eval "focus"       "command -c rsz" # Tab
+#bind -c rsz -k kl eval "focus left"  "command -c rsz" # Left
+#bind -c rsz -k kr eval "focus right" "command -c rsz" # Right
+#bind -c rsz -k ku eval "focus up"    "command -c rsz" # Up
+#bind -c rsz -k kd eval "focus down"  "command -c rsz" # Down
